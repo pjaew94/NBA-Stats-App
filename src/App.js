@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
-function App() {
+import { playerFirstNameStats } from "./api/apiController";
+import "./App.css";
+
+const App = () => {
+  const [query, setQuery] = useState("");
+  const [stats, setStats] = useState({});
+
+  const search = async (e) => {
+    if (e.key === "Enter") {
+      const data = await playerFirstNameStats(query);
+
+      setStats(data);
+      setQuery("");
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="main_container">
+      <input
+        type="text"
+        className="search"
+        placeholder="Search..."
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        onKeyPress={search}
+      >
+
+      </input>
     </div>
   );
-}
+};
 
 export default App;
