@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 
-import { playerFirstNameStats } from "./api/apiController";
-import "./App.css";
+import { getPlayerList } from "./api/apiController";
+
+import "./App.scss";
 
 const App = () => {
   const [query, setQuery] = useState("");
-  const [stats, setStats] = useState({});
+  const [list, setList] = useState([]);
 
   const search = async (e) => {
     if (e.key === "Enter") {
-      const data = await playerFirstNameStats(query);
+      const data = await getPlayerList(query);
 
-      setStats(data);
+      setList(data);
+      console.log(data)
       setQuery("");
     }
   };
+
 
   return (
     <div className="main_container">
@@ -25,10 +28,25 @@ const App = () => {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         onKeyPress={search}
-      >
-
-      </input>
+      />
+    <div className='player_list'>
+        {list ? list.map((player) => {
+        if (player.yearsPro === 0) {
+          return null
+        } else {
+          return <div className='listed_player' key={player.playerId}>
+            {player.firstName}
+            {player.lastName}
+            {/* {player.leagues.standard.pos} */}
+            {/* {player.leagues.standard.jersey} */}
+            <div>{Math.floor(player.heightInMeters * 39.3701/12)}'{Math.floor(player.heightInMeters * 39.3701%12)} </div>
+            {player.weightInKilograms*2.20462}
+        </div>
+        }
+    }) : null}
     </div>
+    </div>
+    
   );
 };
 

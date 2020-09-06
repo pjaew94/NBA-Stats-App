@@ -1,20 +1,27 @@
+import {URL, APIHOST, APIKEY } from './secrets';
 const axios = require("axios");
-const config = require("config");
 
-export const playerFirstNameStats = async (req, res) => {
-
-  const { data } = await axios({
-    method: "GET",
-    url: config.get("playerFirstNameURL"),
-    headers: {
-      "content-type": "application/octet-stream",
-      "x-rapidapi-host": config.get("APIHOST"),
-      "x-rapidapi-key": config.get("APIKEY"),
-      useQueryString: true,
+export const getPlayerList = async (query) => {
+  try {
+    const { data } = await axios({
+    "method":"GET",
+    "url": URL + 'players/firstName/' + query,
+    "headers":{
+    "content-type":"application/octet-stream",
+    "x-rapidapi-host":APIHOST,
+    "x-rapidapi-key":APIKEY,
+    "useQueryString":true
     },
-  });
+  })
 
-  return data;
-};
+  let playerList = data.api.players;
 
 
+  return playerList
+
+  } catch(err) {
+
+    console.error(err);
+
+  }
+}
