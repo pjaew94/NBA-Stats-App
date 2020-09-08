@@ -1,0 +1,21 @@
+@import '../config';
+
+.player_list_container {
+    @extend %center_flex;
+    width: 50%;
+    height: 100%;
+    
+    input {
+        border: none;
+        border-bottom: solid 2px black;
+        box-sizing: border-box;
+        font-size: 2rem;
+        height: 2em;
+        outline: none;
+        padding: 0.5rem;
+        transition: all 0.2s ease-in;
+        &:focus {
+            border-bottom: solid 2px pink;
+        }
+    }
+}

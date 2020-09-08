@@ -1,0 +1,43 @@
+@import "config";
+
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.main_container {
+  @extend %center_flex;
+  flex-direction: column;
+  @extend %max_h_w;
+
+  .logo_container {
+    @extend %center_flex;
+    width: 100vw;
+    height: 30vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./svgs/logoWallpaper.jpg");
+
+    .logo_wrapper {
+      @extend %center_flex;
+      background: white;
+      padding: 10px 20px;
+      
+      img {
+        height: 70px;
+        width: auto;
+        margin-right: 20px;
+      }
+
+      h1 {
+        @extend %title_font;
+      }
+    }
+  }
+
+  .compare_container {
+    @extend %center_flex;
+    width: 100vw;
+    height: 70%;
+  }
+}

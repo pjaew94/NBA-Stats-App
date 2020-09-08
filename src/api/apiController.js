@@ -1,23 +1,27 @@
-import {URL, APIHOST, APIKEY } from './secrets';
 const axios = require("axios");
 
 export const getPlayerList = async (query) => {
+
+  const url = 'https://api.sportsdata.io/v3/nba/scores/json/Players'
+  let result = null;
+
   try {
-    const { data } = await axios({
-    "method":"GET",
-    "url": URL + 'players/firstName/' + query,
-    "headers":{
-    "content-type":"application/octet-stream",
-    "x-rapidapi-host":APIHOST,
-    "x-rapidapi-key":APIKEY,
-    "useQueryString":true
-    },
-  })
+    result = await axios(url, {
+      headers: {
+        Accept: 'application/json',
+        'Ocp-Apim-Subscription-Key': 'c1e3c9f3ef774e5587964be4c5a524eb'
+      }
+    })
 
-  let playerList = data.api.players;
+    let players = result.data;
+
+    let searchedPlayers = await players.filter(function(e) {
+      return e.FirstName.toLowerCase() === query.toLowerCase() || e.LastName.toLowerCase() === query.toLowerCase()
+    })
 
 
-  return playerList
+
+  return searchedPlayers
 
   } catch(err) {
 

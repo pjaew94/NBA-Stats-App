@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Graduate&display=swap');
+
+// Flex configs
+%center_flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  %space_between_flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  %space_evenly_flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  // Text configs
+%title_font {
+    font-family: 'Graduate', cursive;
+    font-size: 5rem;
+    line-height: 6rem;
+  }
+
+// Max Height Width
+%max_h_w {
+    height: 100vh;
+    width: 100vw;
+}
+  
