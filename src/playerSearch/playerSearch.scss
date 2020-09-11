@@ -1,21 +1,91 @@
-@import '../config';
+@import "../config";
 
 .player_list_container {
     @extend %center_flex;
+    flex-direction: column;
     width: 50%;
     height: 100%;
-    
+    font-family: 'Open Sans', 'sans-serif';
+
     input {
         border: none;
-        border-bottom: solid 2px black;
+        border-radius: 5px;
         box-sizing: border-box;
-        font-size: 2rem;
-        height: 2em;
+        background: rgb(219, 219, 219);
+        font-size: 1.2rem;
+        height: 1.5em;
         outline: none;
         padding: 0.5rem;
         transition: all 0.2s ease-in;
+        width: 200px;
+        
         &:focus {
-            border-bottom: solid 2px pink;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            background: rgb(219, 219, 219);
+            border-bottom: none;
+       
+        }
+        &:focus + button.search_button {
+            transform: translateX(0);
+            opacity: 1;
+
+        }
+    }
+
+    button {
+        height: 1.8rem;
+        width: 1.8rem;
+        background: none;
+        border: solid 1px gray;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        transform: translateX(10px);
+        transition: all 0.2s ease-in;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .player_list {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        flex-direction: column;
+        height: 90%;
+        width: 100%;
+
+        ul {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            list-style-type: none;
+            height: 50px;
+            width: 80%;
+            border-bottom: solid 1px black;
+
+
+            li {
+                text-decoration: none;
+                font-size: 0.8rem;
+                font-weight: 700;
+            }
+        }
+
+        .listed_player {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            height: 70px;
+            width: 80%;
+
+        }
+
+        .empty_list {
+            height: 300px;
+            width: 300px;
         }
     }
 }
