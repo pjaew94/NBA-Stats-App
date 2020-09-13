@@ -5,7 +5,7 @@
     flex-direction: column;
     width: 50%;
     height: 100%;
-    font-family: 'Open Sans', 'sans-serif';
+    font-family: "Open Sans", "sans-serif";
 
     input {
         border: none;
@@ -18,18 +18,16 @@
         padding: 0.5rem;
         transition: all 0.2s ease-in;
         width: 200px;
-        
+
         &:focus {
             border-top-right-radius: 0px;
             border-bottom-right-radius: 0px;
             background: rgb(219, 219, 219);
             border-bottom: none;
-       
         }
         &:focus + button.search_button {
             transform: translateX(0);
             opacity: 1;
-
         }
     }
 
@@ -54,6 +52,7 @@
         flex-direction: column;
         height: 90%;
         width: 100%;
+        cursor: pointer;
 
         ul {
             display: flex;
@@ -61,26 +60,45 @@
             justify-content: space-around;
             list-style-type: none;
             height: 50px;
-            width: 80%;
+            width: 90%;
             border-bottom: solid 1px black;
 
-
             li {
+                @extend %center_flex;
+                width: 11.5%;
+                height: 100%;
                 text-decoration: none;
                 font-size: 0.8rem;
                 font-weight: 700;
+
+                img {
+                    height: 90%;
+                    width: auto;
+                }
+          
+
+                span {
+                    font-weight: 700;
+                    font-size: 0.8rem;
+                }
             }
         }
 
         .listed_player {
-            font-family: 'Open Sans', sans-serif;
-            font-size: 0.8rem;
             display: flex;
             align-items: center;
-            justify-content: space-around;
-            height: 70px;
-            width: 80%;
 
+            height: 70px;
+            width: 90%;
+            border-bottom: none;
+
+            &:hover {
+                background: rgb(224, 224, 224);
+            }
+
+            li {
+                font-weight: 400;
+            }
         }
 
         .empty_list {

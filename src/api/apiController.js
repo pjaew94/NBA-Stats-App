@@ -1,3 +1,4 @@
+import { APIKEY } from './secrets'
 const axios = require("axios");
 
 export const getPlayerList = async (query) => {
@@ -9,7 +10,7 @@ export const getPlayerList = async (query) => {
     result = await axios(url, {
       headers: {
         Accept: 'application/json',
-        'Ocp-Apim-Subscription-Key': 'c1e3c9f3ef774e5587964be4c5a524eb'
+        'Ocp-Apim-Subscription-Key': APIKEY
       }
     })
 
@@ -18,6 +19,8 @@ export const getPlayerList = async (query) => {
     let searchedPlayers = await players.filter(function(e) {
       return e.FirstName.toLowerCase() === query.toLowerCase() || e.LastName.toLowerCase() === query.toLowerCase()
     })
+
+   
 
   return searchedPlayers
 
@@ -30,19 +33,40 @@ export const getPlayerList = async (query) => {
 export const getAllStars = async () => {
 
   const url = 'https://api.sportsdata.io/v3/nba/stats/json/AllStars/2020'
-  let result = null;
+  let allStars = null;
+  let allStarProfiles = [];
 
   try {
-    result = await axios(url, {
+    allStars = await axios(url, {
       headers: {
         Accept: 'application/json',
-        'Ocp-Apim-Subscription-Key': 'c1e3c9f3ef774e5587964be4c5a524eb'
+        'Ocp-Apim-Subscription-Key': APIKEY
       }
     })
 
-    let players = result.data;
+    let stars = allStars.data;
 
-    return players
+    for(let i = 0; i < stars.length; i++) {
+
+      let url = 'https://api.sportsdata.io/v3/nba/scores/json/Player/' + stars[i].PlayerID;
+      let starProfile = null;
+
+      try {
+        starProfile = await axios(url, {
+          headers: {
+            Accept: 'application/json',
+            'Ocp-Apim-Subscription-Key': APIKEY
+          }
+        })
+      } catch(err) {
+        console.error(err)
+      }
+      allStarProfiles.push(starProfile);
+    }
+
+ 
+
+    return allStarProfiles
 
   } catch(err) {
     console.error(err);

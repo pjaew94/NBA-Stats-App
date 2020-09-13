@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SuggestedCard = () => {
+const SuggestedCard = (props) => {
 
     return (
         <div>

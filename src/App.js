@@ -16,7 +16,7 @@ const App = () => {
       </div>
       <div className="compare_container">
         <ListPlayers />
-        <ListPlayers />
+        <div className='placeholder'></div>
       </div>
     </div>
   );

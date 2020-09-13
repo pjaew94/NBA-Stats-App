@@ -39,5 +39,10 @@
     @extend %center_flex;
     width: 100vw;
     height: 70%;
+
+    .placeholder {
+      height: 100%;
+      width: 50%;
+    }
   }
 }

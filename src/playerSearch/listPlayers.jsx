@@ -8,7 +8,7 @@ import { RiSearch2Line } from "react-icons/ri";
 
 const ListPlayers = () => {
   const [query, setQuery] = useState("");
-  const [list, setList] = useState([]);
+  const [list, setList] = useState();
   const [suggested, setSuggested] = useState([]);
   const [listExists, setListExists] = useState(false);
 
@@ -18,14 +18,16 @@ const ListPlayers = () => {
       setSuggested(data);
     }
 
-    fetchData()
-  });
+    // fetchData()
+
+  },[]);
 
   const search = async (e) => {
     if (e.key === "Enter") {
       const data = await getPlayerList(query);
 
       setList(data);
+
       if (list) {
         setListExists(true);
       } else {
@@ -52,7 +54,7 @@ const ListPlayers = () => {
       </div>
 
       <div className="player_list">
-        {listExists ? (
+        {list ? (
           <ul className="headers">
             <li className="headshot"></li>
             <li className="name">NAME</li>
@@ -67,12 +69,12 @@ const ListPlayers = () => {
         {list
           ? list.map((player) => {
               return (
-                <ul className="listed_player" key={player.PlayerId}>
+                <ul className='listed_player {}' key={player.PlayerID}>
                   <li>
                     <img src={player.PhotoUrl} alt=""></img>
                   </li>
-                  <li>
-                    {player.FirstName} {player.LastName} {player.Jersey}
+                  <li className='name'>
+                    {player.FirstName} <span>{player.LastName}</span> {player.Jersey}
                   </li>
                   <li>{player.Position}</li>
                   <li>
@@ -84,14 +86,8 @@ const ListPlayers = () => {
                 </ul>
               );
             })
-          : null}
+          : <div>hello</div>}
 
-        {!listExists ? (
-          <div className="suggested_container">
-            <SuggestedCard />
-            
-          </div>
-        ) : null}
       </div>
     </div>
   );
